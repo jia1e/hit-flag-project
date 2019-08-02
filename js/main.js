@@ -117,6 +117,7 @@ function getRandom(rank, name, head) {
     var bgPromise = new Promise(function(resolve) {
             var img = new Image();
             img.src = "./img/" + imgNo;
+            img.crossOrigin = "*";
             img.onload = function() {
                 resolve(img);
             };
@@ -124,6 +125,7 @@ function getRandom(rank, name, head) {
         headImgPromise = new Promise(function(resolve) {
             var img = new Image();
             img.src = head;
+            img.crossOrigin = "*";
             img.onload = function() {
                 resolve(img);
             };
@@ -192,7 +194,10 @@ function getRandom(rank, name, head) {
             textCursorY = textRect.y + textFontSize;
 
         ctx.fillStyle = "#2d5578";
-        ctx.font = "" + textFontSize * 1.2 + "px HelveticaNeue,Helvetica,'Heiti SC','Droid Sans',Droidsansfallback,'华文细黑'";
+        ctx.font =
+            "" +
+            textFontSize * 1.2 +
+            "px HelveticaNeue,Helvetica,'Heiti SC','Droid Sans',Droidsansfallback,'华文细黑'";
 
         String(name || "")
             .split("")
@@ -209,7 +214,10 @@ function getRandom(rank, name, head) {
 
         textCursorX = textCursorX + textFontSize * 0.5;
 
-        ctx.font = "" + textFontSize + "px HelveticaNeue,Helvetica,'Heiti SC','Droid Sans',Droidsansfallback,'华文细黑'";
+        ctx.font =
+            "" +
+            textFontSize +
+            "px HelveticaNeue,Helvetica,'Heiti SC','Droid Sans',Droidsansfallback,'华文细黑'";
         String(text || "")
             .split("")
             .forEach(char => {
@@ -222,9 +230,8 @@ function getRandom(rank, name, head) {
                 ctx.fillText(char, textCursorX, textCursorY);
                 textCursorX = textCursorX + textMetrics.width;
             });
-
-        var imageElement = document.getElementById("random-img");
-        imageElement.src = canvas.toDataURL();
+        canvas.style.width="100%";
+        document.querySelector('#container').appendChild(canvas);
     });
 }
 
